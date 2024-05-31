@@ -35,7 +35,6 @@ Cpu5 = player('Cpu 5', 'NA')
 Cpu6 = player('Cpu 6', 'NA')
 Cpu7 = player('Cpu 7', 'NA')
 CPUS = [Cpu1,Cpu2,Cpu3,Cpu4,Cpu5,Cpu6,Cpu7]
-allPlay = []
 compList = []
 River = []
 RP = 0
@@ -49,7 +48,7 @@ random.shuffle(deck)
 def dealHand():
     for x in range(6):
         x = 0
-        for x in range(8):
+        for x in range(4):
             x + 1
             card = deck.pop(0)
             allPlay[x].hand.insert(0, card)
@@ -67,7 +66,7 @@ def rotation_p():
         over += 1
         River.clear()
         LeaderCard = 0
-        for x in range(8):
+        for x in range(4):
             if (allAt.index(P1) == turn):
                 x = 0
                 print("Pick the card you'd like to play.")
@@ -75,6 +74,63 @@ def rotation_p():
                 GC = int(input())
                 C = P1.hand.index(GC)
                 GameCard = P1.hand.pop(C)
+                if (GameCard >= LeaderCard):
+                    LeaderCard = GameCard
+                    turn += 1
+                elif (GameCard < LeaderCard):
+                    print("Invalid, playing your lowest card.")
+                    P1.hand.insert(0, GameCard)
+                    P1.hand.sort()
+                    GameCard = P1.hand.pop(0)
+                    turn += 1
+                River.insert(0, GameCard)
+                print("The river is",River,"\nThe Leader card is",LeaderCard)
+                time.sleep(1)
+            elif (allAt.index(P2) == turn and numplay == "2"):
+                x = 0
+                print("Pick the card you'd like to play.")
+                P2.display_hand()
+                GC = int(input())
+                C = P2.hand.index(GC)
+                GameCard = P1.hand.pop(C)
+                if (GameCard >= LeaderCard):
+                    LeaderCard = GameCard
+                    turn += 1
+                elif (GameCard < LeaderCard):
+                    print("Invalid, playing your lowest card.")
+                    P1.hand.insert(0, GameCard)
+                    P1.hand.sort()
+                    GameCard = P1.hand.pop(0)
+                    turn += 1
+                River.insert(0, GameCard)
+                print("The river is",River,"\nThe Leader card is",LeaderCard)
+                time.sleep(1)
+            elif (allAt.index(P3) == turn and numplay == "3"):
+                x = 0
+                print("Pick the card you'd like to play.")
+                P3.display_hand()
+                GC = int(input())
+                C = P3.hand.index(GC)
+                GameCard = P3.hand.pop(C)
+                if (GameCard >= LeaderCard):
+                    LeaderCard = GameCard
+                    turn += 1
+                elif (GameCard < LeaderCard):
+                    print("Invalid, playing your lowest card.")
+                    P1.hand.insert(0, GameCard)
+                    P1.hand.sort()
+                    GameCard = P1.hand.pop(0)
+                    turn += 1
+                River.insert(0, GameCard)
+                print("The river is",River,"\nThe Leader card is",LeaderCard)
+                time.sleep(1)
+            elif (allAt.index(P4) == turn and numplay == "4"):
+                x = 0
+                print("Pick the card you'd like to play.")
+                P4.display_hand()
+                GC = int(input())
+                C = P4.hand.index(GC)
+                GameCard = P4.hand.pop(C)
                 if (GameCard >= LeaderCard):
                     LeaderCard = GameCard
                     turn += 1
@@ -134,19 +190,21 @@ def rotation_p():
             else:
                 print(f"A CPU won, do you really care which one? Like really? Are you mentally ill?")
             quit()
-ghj = ["ghg",'GFSDDF','klk']
+
 def menu():
     global allPlay 
+    global numPlay
     numPlay = input("how many players are there?")
     if (numPlay == "1"):
         allPlay = [P1,Cpu1,Cpu2,Cpu3]
+        '''
     if (numPlay == "2"):
         allPlay = [P1,P2,Cpu1,Cpu2]
     if (numPlay == "3"):
         allPlay = [P1,P2,P3,Cpu1]
     if (numPlay == "4"):
         allPlay = [P1,P2,P3,P4]
-    print(allPlay)
+    print(allPlay)'''
     rotation_p()
 #rotation_p()
 menu()
