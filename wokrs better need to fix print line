@@ -1,0 +1,207 @@
+#Libaries
+import random
+import time
+import pygame
+class player:
+    def __init__(self, name, hand):
+        self.name = name
+        self.hand = []
+    def assign_hand(self, hand):
+        self.hand.extend(hand)
+    def display_name(self):
+        print(self.name, "played...")
+    def display_hand(self):
+        print(self.hand)
+
+
+deck = [2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,10,10,10,10,11,11,11,11,12,12,12,12,13,13,13,13,14,14,14,14] #Deck
+P1 = player('Player 1', 'NA')
+P2 = player('Player 2', 'NA')
+P3 = player('Player 3', 'NA')
+P4 = player('Player 4', 'NA')
+Cpu1 = player('Cpu 1', 'NA')
+Cpu2 = player('Cpu 2', 'NA')
+Cpu3 = player('Cpu 3', 'NA')
+Cpu4 = player('Cpu 4', 'NA')
+Cpu5 = player('Cpu 5', 'NA')
+Cpu6 = player('Cpu 6', 'NA')
+Cpu7 = player('Cpu 7', 'NA')
+CPUS = [Cpu1,Cpu2,Cpu3,Cpu4,Cpu5,Cpu6,Cpu7]
+compList = []
+River = []
+RP = 0
+
+#shuffling the deck
+random.shuffle(deck)
+#setting player hand
+def dealHand():
+    for x in range(6):
+        x = 0
+        for y in range(4):
+            y + 1
+            card = deck.pop(0)
+            allPlay[y].hand.insert(0, card)
+            allPlay[y].hand.sort()
+            allPlay[y].display_hand()
+def rotation_p():
+    y = True
+    t = False
+    f = False
+    over = 0
+    up = 0
+
+    dealHand()
+    allAt = allPlay[:]
+    while y == True :
+        turn = 0
+        over += 1
+        River.clear()
+        LeaderCard = 0
+        for x in range(3):
+            print(x)
+            if (P1 in allAt):
+                if (allAt.index(P1) == turn):
+                    print("\n"*5," Player 1:")
+                    print("Pick the card you'd like to play.")
+                    print("The river is",River,"\nThe Leader card is",LeaderCard)
+                    P1.display_hand()
+                    GC = int(input())
+                    C = P1.hand.index(GC)
+                    GameCard = P1.hand.pop(C)
+                    if (GameCard >= LeaderCard):
+                        LeaderCard = GameCard
+                        turn += 1
+                        win = turn
+
+                    elif (GameCard < LeaderCard):
+                        print("Invalid, playing your lowest card.")
+                        P1.hand.insert(0, GameCard)
+                        P1.hand.sort()
+                        GameCard = P1.hand.pop(0)
+                        turn += 1
+                    River.insert(0, GameCard)
+                    
+            if (P2 in allAt):
+                if (allAt.index(P2) == turn):
+                    print("\n"*5,"Player 2\nPick the card you'd like to play.")
+                    print("The river is",River,"\nThe Leader card is",LeaderCard)
+                    P2.display_hand()
+                    GC = int(input())
+                    C = P2.hand.index(GC)
+                    GameCard = P2.hand.pop(C)
+                    if (GameCard >= LeaderCard):
+                        LeaderCard = GameCard
+                        turn += 1
+                        win = turn
+
+                    elif (GameCard < LeaderCard):
+                        print("Invalid, playing your lowest card.")
+                        P2.hand.insert(0, GameCard)
+                        P2.hand.sort()
+                        GameCard = P2.hand.pop(0)
+                        turn += 1
+                    River.insert(0, GameCard)
+                    
+            if (P3 in allAt):
+                if (allAt.index(P3) == turn):
+                    print("\n"*5,"Player 3\nPick the card you'd like to play.")
+                    print("The river is",River,"\nThe Leader card is",LeaderCard)
+                    P3.display_hand()
+                    GC = int(input())
+                    C = P3.hand.index(GC)
+                    GameCard = P3.hand.pop(C)
+                    if (GameCard >= LeaderCard):
+                        LeaderCard = GameCard
+                        turn += 1
+                        win = turn
+                        
+                    elif (GameCard < LeaderCard):
+                        print("Invalid, playing your lowest card.")
+                        P3.hand.insert(0, GameCard)
+                        P3.hand.sort()
+                        GameCard = P3.hand.pop(0)
+                        turn += 1
+                    River.insert(0, GameCard)
+            if (P4 in allAt):
+                if (allAt.index(P4) == turn):
+                    print("\n"*5,"Player 4\nPick the card you'd like to play.")
+                    print("The river is",River,"\nThe Leader card is",LeaderCard)
+                    P4.display_hand()
+                    GC = int(input())
+                    C = P4.hand.index(GC)
+                    GameCard = P4.hand.pop(C)
+                    if (GameCard >= LeaderCard):
+                        LeaderCard = GameCard
+                        turn += 1
+                        win = turn
+
+                    elif (GameCard < LeaderCard):
+                        print("Invalid, playing your lowest card.")
+                        P4.hand.insert(0, GameCard)
+                        P4.hand.sort()
+                        GameCard = P4.hand.pop(0)
+                        turn += 1
+                    River.insert(0, GameCard)
+                    
+            elif(turn <= 3):
+                GameCard = allAt[turn].hand.pop(-1)
+                if (GameCard >= LeaderCard):
+                    LeaderCard = GameCard
+                    River.insert(-1, GameCard)
+                    win = turn
+
+                    print(f"{allPlay[win].display_name()}{GameCard}!")
+                    turn += 1
+                elif (GameCard < LeaderCard):
+                    allAt[turn].hand.insert(0, GameCard)
+                    allAt[turn].hand.sort()
+                    GameCard = allAt[turn].hand.pop( 0 )
+                    River.insert(0, GameCard)
+                    DRP = turn 
+                    print(f"{allAt[turn]}River)
+                    turn += 1
+                    time.sleep(1)
+                    print(f"{allPlay[DRP].display_name()}{GameCard}!")
+                    time.sleep(1)
+
+        for players in range(len(allAt)):
+            print(allAt[players].name)
+        for move in range(win-1):
+            playerMove = allAt.pop(0)
+            playerMove.name
+            allAt.insert(4,playerMove)
+        
+        print("New List")
+        for players in range(len(allAt)):
+            print(allAt[players].name)
+        time.sleep(2)
+        x = 0
+    
+
+        if (over == 5):
+            y = False
+            t = True
+        while t == True:
+            winCheck = allAt[up].hand.pop()
+            compList.insert(0, winCheck)
+            up = up + 1
+            if (up == 4):
+                t = False
+                f = True
+def menu():
+    global allPlay 
+    global numPlay
+    numPlay = input("how many players are there?")
+    if (numPlay == "1"):
+        allPlay = [P1,Cpu1,Cpu2,Cpu3]
+    if (numPlay == "2"):
+        allPlay = [P1,P2,Cpu1,Cpu2]
+    if (numPlay == "3"):
+        allPlay = [P1,P2,P3,Cpu1]
+    if (numPlay == "4"):
+        allPlay = [P1,P2,P3,P4]
+    for see in range(len(allPlay)):
+        print(allPlay[see].name)
+    rotation_p()
+#rotation_p()
+menu()
